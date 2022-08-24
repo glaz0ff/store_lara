@@ -29,10 +29,6 @@ class CreateStoreProductsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignId('seller_id')
-                ->constrained('store_sellers')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
     }
 

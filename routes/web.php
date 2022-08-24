@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Store\ProductController;
-
+use App\Http\Controllers\Store\Admin\CategoryController;
+use App\Http\Controllers\Store\Admin\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +26,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+$groupData = [
+    'prefix' => 'admin/store'
+];
+Route::group($groupData, function ()
+{
+    $methods = ['index', 'edit', 'store', 'update', 'create',];
+    Route::resource('category', CategoryController::class)
+        ->only($methods)
+        ->names('store.admin.category');
+});
