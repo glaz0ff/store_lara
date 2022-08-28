@@ -56,9 +56,8 @@ class BuyController extends BaseController
      */
     public function store(Request $request)
     {
-
         $data = [
-            'user_id' => rand(1, 2),
+            'user_id' => $request->user_id,
             'product_id' => $request->id,
         ];
         $item = (new StoreBuy())->create($data);

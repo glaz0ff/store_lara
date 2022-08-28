@@ -23,8 +23,10 @@ Route::get('/', function () {
 Route::group(['prefix'=>'store'], function () {
     Route::resource('products', GuestProductController::class)->names('store.products');
 });
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
 Auth::routes();
 

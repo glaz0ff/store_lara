@@ -13,7 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <a class="btn btn-secondary" href="{{route('store.products.index')}}">Продукты</a>
+
+                        <a class="btn btn-secondary" href="{{route('store.products.index', Auth::user()->id)}}">Продукты</a>
                 </div>
             </div>
         </div>

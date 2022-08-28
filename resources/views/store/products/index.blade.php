@@ -7,25 +7,28 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-
-<table class="table table-hover">
-        <tr>
-            <th>id</th>
-            <th>Название</th>
-            <th>Цена</th>
-        </tr>
-    @foreach($items as $item)
-        <tr>
-            <td>{{$item->id}}</td>
-            <td>{{$item->title}}</td>
-            <td>{{$item->price}}</td>
-            <td>
-                <a class="btn btn-secondary" href="{{route('store.admin.buys.create', ['id' => $item->id])}}">Купить</a>
-            </td>
-        </tr>
-
-    @endforeach
-</table>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>id</th>
+                                <th>Название</th>
+                                <th>Цена</th>
+                            </tr>
+                            @foreach($items as $item)
+                                <tr>
+                                    <td>{{$item->id}}</td>
+                                    <td>{{$item->title}}</td>
+                                    <td>{{$item->price}}</td>
+                                    <td>
+                                        <a class="btn btn-secondary" @if(Auth::user()!=null)
+                                            href="{{route('store.admin.buys.create', ['id' => $item->id])}}"
+                                           @else
+                                               href="{{route('login')}}"
+                                            @endif
+                                        >Купить</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
                     </div>
                 </div>
             </div>
