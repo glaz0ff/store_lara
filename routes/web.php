@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Store\Admin\CategoryController;
 use App\Http\Controllers\Store\Admin\ProductController;
+use App\Http\Controllers\Store\ProductController as GuestProductController;
+use App\Http\Controllers\Store\Admin\BuyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +21,10 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'store'], function () {
-    Route::resource('products', ProductController::class)->names('store.products');
+    Route::resource('products', GuestProductController::class)->names('store.products');
 });
+
+
 
 Auth::routes();
 
@@ -35,4 +39,10 @@ Route::group($groupData, function ()
     Route::resource('category', CategoryController::class)
         ->only($methods)
         ->names('store.admin.category');
+    Route::resource('product', ProductController::class)
+        ->only($methods)
+        ->names('store.admin.product');
+    Route::resource('buys', BuyController::class)
+        ->only($methods)
+        ->names('store.admin.buys');
 });

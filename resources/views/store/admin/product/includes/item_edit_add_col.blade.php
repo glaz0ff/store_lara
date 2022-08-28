@@ -1,5 +1,5 @@
 @php
-    /** @var App\Models\StoreCategory $item */
+    /** @var App\Models\StoreProduct $item */
 @endphp
 
 <div class="row justify-content-center">
@@ -43,6 +43,18 @@
                         <label for="title">Удалено</label>
                         <input type="text" value="{{$item->deleted_at}}" class="form-control" disabled>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary">
+                        Удалить
+                    </button>
                 </div>
             </div>
         </div>

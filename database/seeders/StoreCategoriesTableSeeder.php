@@ -36,5 +36,6 @@ class StoreCategoriesTableSeeder extends Seeder
                 'description'=>'бабуба',
             ];
         }
-        \DB::table('store_categories')->insert($categories);    }
+        \DB::table('store_categories')->insert($categories);
+    }
 }

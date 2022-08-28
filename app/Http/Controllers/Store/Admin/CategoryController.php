@@ -20,7 +20,6 @@ class CategoryController extends BaseController
         $this->storeCategoryRepository = app(StoreCategoryRepository::class);
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -64,7 +63,7 @@ class CategoryController extends BaseController
         $item = (new StoreCategory())->create($data);
         if($item)
         {
-            return redirect()->route('store.admin.categories.edit', $item->id)
+            return redirect()->route('store.admin.category.edit', $item->id)
                 ->with(['success'=>'Успешно сохранено']);
         }
         else
@@ -93,6 +92,7 @@ class CategoryController extends BaseController
      */
     public function edit($id, StoreCategoryRepository $categoryRepository)
     {
+
         $item = $categoryRepository->getEdit($id);
         if(empty($item))
         {
@@ -115,7 +115,8 @@ class CategoryController extends BaseController
         $item = $this->storeCategoryRepository->getEdit($id);
         if(empty($item))
         {
-            return back(['msg'=>"Запись id = [{$id}] не найдена"])
+            return back()
+                ->withErrors(['msg'=>"Запись id = [{$id}] не найдена"])
                 ->withInput();
         }
 
@@ -124,7 +125,7 @@ class CategoryController extends BaseController
             $data['slug'] = str::slug($data['title']);
         }
 
-        $result = $this->update($data);
+        $result = $item->update($data);
 
         if($result)
         {

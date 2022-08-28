@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\StoreCategory as Model;
+use App\Models\StoreProduct as Model;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @package App\Repositories
  */
 
-class StoreCategoryRepository extends CoreRepository
+class StoreProductRepository extends CoreRepository
 {
     /**
      * @return string
@@ -31,35 +31,30 @@ class StoreCategoryRepository extends CoreRepository
         return $this->startConditions()->find($id);
     }
 
-    /**
-     * @return Collection
-     */
-    public function getForComboBox()
-    {
-        $fields = implode(', ',[
-            'id',
-            'CONCAT (id,". ", title) AS title',
-        ]);
-
-        $result = $this
-            ->startConditions()
-            ->selectRaw($fields)
-            ->toBase()
-            ->get();
-        return $result;
-    }
 
     /**
      * @param int|null $perPage
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-
-    public function getAllWithPaginate($perPage = null)
+    public function getAllWithPaginate()
     {
-        $fields = ['id', 'title', 'parent_id'];
-        return $this
+        $fields = [
+            'id',
+            'title',
+            'slug',
+            'price',
+            'category_id',
+            ];
+        $result = $this
             ->startConditions()
             ->select($fields)
-            ->paginate($perPage);
+            ->orderBy('id','DESC')
+            ->with(['category'])
+            ->with(['category'=>function($query){
+                $query->select(['id','title']);
+            }])
+            ->paginate(25);
+
+        return $result;
     }
 }

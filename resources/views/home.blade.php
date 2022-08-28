@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                        <a class="btn btn-secondary" href="{{route('store.products.index')}}">Продукты</a>
                 </div>
             </div>
         </div>

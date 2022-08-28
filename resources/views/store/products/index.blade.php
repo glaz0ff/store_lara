@@ -1,13 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<table>
+    @include('store.admin.buys.includes.result_message')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+<table class="table table-hover">
+        <tr>
+            <th>id</th>
+            <th>Название</th>
+            <th>Цена</th>
+        </tr>
     @foreach($items as $item)
         <tr>
             <td>{{$item->id}}</td>
             <td>{{$item->title}}</td>
             <td>{{$item->price}}</td>
+            <td>
+                <a class="btn btn-secondary" href="{{route('store.admin.buys.create', ['id' => $item->id])}}">Купить</a>
+            </td>
         </tr>
+
     @endforeach
 </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
