@@ -15,7 +15,6 @@
                                 <th>Цена</th>
                             </tr>
                             @foreach($items as $item)
-                                @if($item->category_id == $id)
                                     <tr>
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->title}}</td>
@@ -29,7 +28,6 @@
                                             >Купить</a>
                                         </td>
                                     </tr>
-                                @endif
                             @endforeach
                         </table>
                     </div>

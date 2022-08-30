@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Store;
 use App\Http\Controllers\Controller;
 use App\Models\StoreProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -16,10 +17,10 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $id = $request->id;
-        $items = StoreProduct::all();
-
-        return view('store.categories.index', compact('items', 'id'));
+        $items = DB::table('store_products')
+            ->where('category_id', $request->id)
+            ->get();
+        return view('store.categories.index', compact('items'));
     }
 
     /**
