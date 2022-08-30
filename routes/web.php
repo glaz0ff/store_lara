@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Store\Admin\CategoryController;
 use App\Http\Controllers\Store\Admin\ProductController;
 use App\Http\Controllers\Store\ProductController as GuestProductController;
+use App\Http\Controllers\Store\CategoryController as GuestCategoryController;
 use App\Http\Controllers\Store\Admin\BuyController;
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'store'], function () {
     Route::resource('products', GuestProductController::class)->names('store.products');
+});
+Route::group(['prefix'=>'store'], function () {
+    Route::resource('category', GuestCategoryController::class)->names('store.category');
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
